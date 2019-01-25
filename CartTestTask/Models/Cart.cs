@@ -84,5 +84,43 @@ namespace CartTestTask.Models
         {
             throw new NotImplementedException();
         }
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                var comparingObject = (Cart)obj;
+
+                bool comparisonResult = GrandTotal == comparingObject.GrandTotal &&
+                                       ItemsList.Count == comparingObject.ItemsList.Count &&
+                                       BonusItemsList.Count == comparingObject.BonusItemsList.Count;
+
+                if (comparisonResult)
+                {
+                    for (int i = 0; i < ItemsList.Count; i++)
+                    {
+                        if (ItemsList[i].Equals(comparingObject.ItemsList[i]))
+                            continue;
+                        else
+                            comparisonResult = false;
+                    }
+
+                    for (int i = 0; i < BonusItemsList.Count; i++)
+                    {
+                        if (BonusItemsList[i].Equals(comparingObject.BonusItemsList[i]))
+                            continue;
+                        else
+                            comparisonResult = false;
+                    }
+                }
+
+                return comparisonResult;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
     }
 }
