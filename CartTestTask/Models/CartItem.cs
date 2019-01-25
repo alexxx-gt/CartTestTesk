@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CartTestTask.Models
 {
-    class CartItem
+    public class CartItem
     {
         public string Id { get; set; }
         public string ProductName { get; set; }

@@ -7,17 +7,19 @@ namespace CartTestTask.Models
 {
     public class Cart : ICart, IDisplay
     {
-        public void AddItem()
+        public List<CartItem> ItemsList { get; set; }
+
+        public void AddItem(CartItem item)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveItem()
+        public void RemoveItem(CartItem item)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveSet()
+        public void RemoveSet(CartItem item)
         {
             throw new NotImplementedException();
         }
@@ -37,17 +39,17 @@ namespace CartTestTask.Models
             throw new NotImplementedException();
         }
 
-        public void GetProductCount()
+        public int GetProductCount()
         {
             throw new NotImplementedException();
         }
 
-        public void GetItemSubtotal()
+        public decimal GetItemSubtotal()
         {
             throw new NotImplementedException();
         }
 
-        public void GetBasketSubtotal()
+        public decimal GetBasketSubtotal()
         {
             throw new NotImplementedException();
         }
@@ -57,7 +59,7 @@ namespace CartTestTask.Models
             throw new NotImplementedException();
         }
 
-        public void GetGrandTotal()
+        public decimal GetGrandTotal()
         {
             throw new NotImplementedException();
         }
