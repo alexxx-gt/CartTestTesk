@@ -11,7 +11,7 @@ namespace CartTest
         [TestMethod]
         public void TestGetProductList()
         {
-            Assert.IsTrue(true);
+            Assert.IsTrue(false);
         }
 
         [TestMethod]

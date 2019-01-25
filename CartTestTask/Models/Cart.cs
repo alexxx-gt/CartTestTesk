@@ -8,7 +8,7 @@ namespace CartTestTask.Models
 {
     public class Cart : ICart, IDisplay
     {
-        public List<CartItem> ItemsList { get; set; }
+        public List<CartItem> ItemsList { get; set; } = new List<CartItem>();
         public decimal GrandTotal { get; set; }
         public List<CartItem> BonusItemsList { get; set; }
 
@@ -42,12 +42,12 @@ namespace CartTestTask.Models
 
         public void RemoveSet(CartItem item)
         {
-            throw new NotImplementedException();
+            ItemsList.Remove(ItemsList.FirstOrDefault(i => i.Id == item.Id));
         }
 
         public void EmptyCart()
         {
-            throw new NotImplementedException();
+            ItemsList = new List<CartItem>();
         }
 
         public void ApplyDiscount()

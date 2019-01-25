@@ -15,7 +15,13 @@ namespace CartTest
         [TestMethod]
         public void TestAddItem()
         {
-            Assert.IsTrue(true);
+            Cart cart = CartHelper.CreateEmptyCart();
+
+            cart.AddItem(CartItemHelper.AddPaperMask(1));
+
+            var existingItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.PAPER_MASK_ID);
+
+            Assert.AreEqual(1, existingItem?.Quantity);
         }
 
         [TestMethod]
@@ -30,31 +36,66 @@ namespace CartTest
 
             var existingItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.PAPER_MASK_ID);
 
-            Assert.AreEqual(4, existingItem.Quantity);
+            Assert.AreEqual(4, existingItem?.Quantity);
         }
 
         [TestMethod]
         public void TestRemoveItem()
         {
-            Assert.IsTrue(true);
+            List<CartItem> items = new List<CartItem>();
+
+            items.Add(CartItemHelper.AddPaperMask(3));
+
+            Cart cart = CartHelper.CreateNotEmptyCart(items);
+            cart.RemoveItem(CartItemHelper.AddPaperMask(1));
+
+            var existingItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.PAPER_MASK_ID);
+
+            Assert.AreEqual(2, existingItem?.Quantity);
         }
 
         [TestMethod]
         public void TestDecreaseItem()
         {
-            Assert.IsTrue(true);
+            List<CartItem> items = new List<CartItem>();
+
+            items.Add(CartItemHelper.AddPaperMask(1));
+
+            Cart cart = CartHelper.CreateNotEmptyCart(items);
+            cart.RemoveItem(CartItemHelper.AddPaperMask(1));
+
+            var existingItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.PAPER_MASK_ID);
+
+            Assert.AreEqual(null, existingItem?.Quantity);
         }
 
         [TestMethod]
         public void TestRemoveSet()
         {
-            Assert.IsTrue(true);
+            List<CartItem> items = new List<CartItem>();
+
+            items.Add(CartItemHelper.AddPaperMask(4));
+
+            Cart cart = CartHelper.CreateNotEmptyCart(items);
+            cart.RemoveSet(CartItemHelper.AddPaperMask(1));
+
+            var existingItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.PAPER_MASK_ID);
+
+            Assert.AreEqual(null, existingItem?.Quantity);
         }
 
         [TestMethod]
         public void TestEmptyCart()
         {
-            Assert.IsTrue(true);
+            List<CartItem> items = new List<CartItem>();
+
+            items.Add(CartItemHelper.AddPaperMask(4));
+            items.Add(CartItemHelper.AddLargeBowl(4));
+
+            Cart cart = CartHelper.CreateNotEmptyCart(items);
+            cart.EmptyCart();
+
+            Assert.AreEqual(0, cart.ItemsList.Count);
         }
 
         [TestMethod]
