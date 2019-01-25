@@ -10,7 +10,7 @@ namespace CartTestTask.Models
     {
         public List<CartItem> ItemsList { get; set; } = new List<CartItem>();
         public decimal GrandTotal { get; set; }
-        public List<CartItem> BonusItemsList { get; set; }
+        public List<CartItem> BonusItemsList { get; set; } = new List<CartItem>();
 
         public void AddItem(CartItem item)
         {
@@ -91,26 +91,32 @@ namespace CartTestTask.Models
             {
                 var comparingObject = (Cart)obj;
 
-                bool comparisonResult = GrandTotal == comparingObject.GrandTotal &&
+                bool comparisonResult = GrandTotal == comparingObject.GrandTotal && 
                                        ItemsList.Count == comparingObject.ItemsList.Count &&
                                        BonusItemsList.Count == comparingObject.BonusItemsList.Count;
 
                 if (comparisonResult)
                 {
-                    for (int i = 0; i < ItemsList.Count; i++)
+                    if (ItemsList.Count > 0)
                     {
-                        if (ItemsList[i].Equals(comparingObject.ItemsList[i]))
-                            continue;
-                        else
-                            comparisonResult = false;
+                        for (int i = 0; i < ItemsList.Count; i++)
+                        {
+                            if (ItemsList[i].Equals(comparingObject.ItemsList[i]))
+                                continue;
+                            else
+                                comparisonResult = false;
+                        }
                     }
 
-                    for (int i = 0; i < BonusItemsList.Count; i++)
+                    if (BonusItemsList.Count > 0)
                     {
-                        if (BonusItemsList[i].Equals(comparingObject.BonusItemsList[i]))
-                            continue;
-                        else
-                            comparisonResult = false;
+                        for (int i = 0; i < BonusItemsList.Count; i++)
+                        {
+                            if (BonusItemsList[i].Equals(comparingObject.BonusItemsList[i]))
+                                continue;
+                            else
+                                comparisonResult = false;
+                        }
                     }
                 }
 
