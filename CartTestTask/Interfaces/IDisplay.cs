@@ -7,8 +7,8 @@ namespace CartTestTask.Interfaces
     public interface IDisplay
     {
         void GetProductList();
-        int GetProductCount();
-        decimal GetItemSubtotal();
+        int GetProductCount(string itemId);
+        decimal GetItemSubtotal(string itemId);
         decimal GetBasketSubtotal();
         void GetDiscount();
         decimal GetGrandTotal();

@@ -50,7 +50,12 @@ namespace CartTestTask.Models
             ItemsList = new List<CartItem>();
         }
 
-        public void ApplyDiscount()
+        public void ApplyDiscountCart()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ApplyRowDiscount()
         {
             throw new NotImplementedException();
         }
@@ -60,14 +65,19 @@ namespace CartTestTask.Models
             throw new NotImplementedException();
         }
 
-        public int GetProductCount()
+        public int GetProductCount(string itemId)
         {
-            throw new NotImplementedException();
+            var item = ItemsList.FirstOrDefault(i => i.Id == itemId);
+
+            if (item != null)
+                return item.Quantity;
+            else
+                throw new Exception();
         }
 
-        public decimal GetItemSubtotal()
+        public decimal GetItemSubtotal(string itemId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public decimal GetBasketSubtotal()
