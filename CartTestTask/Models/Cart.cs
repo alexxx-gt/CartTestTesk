@@ -8,6 +8,8 @@ namespace CartTestTask.Models
     public class Cart : ICart, IDisplay
     {
         public List<CartItem> ItemsList { get; set; }
+        public decimal GrandTotal { get; set; }
+        public List<CartItem> BonusItemsList { get; set; }
 
         public void AddItem(CartItem item)
         {

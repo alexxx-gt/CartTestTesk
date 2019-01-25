@@ -7,6 +7,10 @@ namespace CartTestTask.Interfaces
 {
     public interface ICart
     {
+        List<CartItem> ItemsList { get; set; }
+        decimal GrandTotal { get; set; }
+        List<CartItem> BonusItemsList { get; set; }
+
         void AddItem(CartItem item);
         void RemoveItem(CartItem item);
         void RemoveSet(CartItem item);

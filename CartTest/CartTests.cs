@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CartTest.Helpers;
+using CartTestTask.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CartTest
@@ -11,6 +13,8 @@ namespace CartTest
         [TestMethod]
         public void TestAddItem()
         {
+            Cart cart = CartHelper.CreateCart();
+            cart.AddItem();
             Assert.IsTrue(true);
         }
 
