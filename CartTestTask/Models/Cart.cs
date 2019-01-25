@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CartTestTask.Interfaces;
 
@@ -13,12 +14,30 @@ namespace CartTestTask.Models
 
         public void AddItem(CartItem item)
         {
-            throw new NotImplementedException();
+            var existingItem = ItemsList.FirstOrDefault(i => i.Id == item.Id);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                ItemsList.Add(item);
+            }
         }
 
         public void RemoveItem(CartItem item)
         {
-            throw new NotImplementedException();
+            var existingItem = ItemsList.FirstOrDefault(i => i.Id == item.Id);
+
+            if (existingItem.Quantity > 1)
+            {
+                existingItem.Quantity--;
+            }
+            else
+            {
+                ItemsList.Remove(existingItem);
+            }
         }
 
         public void RemoveSet(CartItem item)
