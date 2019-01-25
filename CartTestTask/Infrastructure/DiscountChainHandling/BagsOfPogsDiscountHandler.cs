@@ -15,7 +15,6 @@ namespace CartTestTask.Infrastructure.DiscountChainHandling
 
             if (bagOfPogsItem != null && bagOfPogsItem.Quantity >= 2)
             {
-                //Calculations
                 Successor.Handle(cart);
             }
             else

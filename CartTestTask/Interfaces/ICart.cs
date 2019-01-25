@@ -10,6 +10,7 @@ namespace CartTestTask.Interfaces
         List<CartItem> ItemsList { get; set; }
         decimal GrandTotal { get; set; }
         List<CartItem> BonusItemsList { get; set; }
+        List<string> DiscountsList 
 
         void AddItem(CartItem item);
         void RemoveItem(CartItem item);

@@ -52,10 +52,15 @@ namespace CartTestTask.Models
 
         public void ApplyDiscountCart()
         {
+            
+        }
+
+        public void ApplyRowSubtotalDiscount()
+        {
             throw new NotImplementedException();
         }
 
-        public void ApplyRowDiscount()
+        public void ApplyRowCountDiscount()
         {
             throw new NotImplementedException();
         }
