@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using CartTestTask.Infrastructure.Constants;
+using CartTestTask.Infrastructure.DiscountChainHandling;
 using CartTestTask.Interfaces;
 
 namespace CartTestTask.Models
@@ -12,7 +14,7 @@ namespace CartTestTask.Models
         public List<CartItem> ItemsList { get; set; } = new List<CartItem>();
         public decimal GrandTotal { get; set; }
         public List<CartItem> BonusItemsList { get; set; } = new List<CartItem>();
-        public List<string> DiscountsList { get; set; }
+        public List<string> DiscountsList { get; set; } = new List<string>();
 
         public void AddItem(CartItem item)
         {
@@ -54,17 +56,15 @@ namespace CartTestTask.Models
 
         public void ApplyDiscountCart()
         {
-            
-        }
+            GrandTotal = GlobalConstants.ZERO_DECIMAL;
+            DiscountsList = new List<string>();
+            BonusItemsList = new List<CartItem>();
 
-        public void ApplyRowSubtotalDiscount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ApplyRowCountDiscount()
-        {
-            throw new NotImplementedException();
+            BagsOfPogsDiscountHandler bagsOfPogs = new BagsOfPogsDiscountHandler();
+            LargeBowlOfTriffleDiscount bowlOfTriffle = new LargeBowlOfTriffleDiscount();
+            ShurikensDiscount shurikens = new ShurikensDiscount();
+            bagsOfPogs.Successor = bowlOfTriffle;
+            bowlOfTriffle.Successor = shurikens;
         }
 
         public void GetProductList()
@@ -108,14 +108,17 @@ namespace CartTestTask.Models
             return sum;
         }
 
-        public void GetDiscount()
+        public List<string> GetDiscount()
         {
-            throw new NotImplementedException();
+            ApplyDiscountCart();
+            return DiscountsList;
         }
 
         public decimal GetGrandTotal()
         {
-            throw new NotImplementedException();
+            ApplyDiscountCart();
+
+            return GrandTotal;
         }
 
         public override bool Equals(object obj)

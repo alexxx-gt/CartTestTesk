@@ -103,5 +103,13 @@ namespace CartTest
         {
             Assert.IsTrue(true);
         }
+
+        [TestMethod]
+        public void TestGetGrandTotalEmptyCart()
+        {
+            Cart cart = CartHelper.CreateEmptyCart();
+
+            Assert.AreEqual(0, cart.GetGrandTotal());
+        }
     }
 }

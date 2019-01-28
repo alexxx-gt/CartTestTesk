@@ -15,7 +15,17 @@ namespace CartTestTask.Infrastructure.DiscountChainHandling
 
             if (largeBowlItem != null)
             {
-                //Calculations
+                cart.DiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+                cart.GrandTotal += largeBowlItem.CostPerUnit * largeBowlItem.Quantity;
+                cart.BonusItemsList.Add(new CartItem
+                {
+                    CostPerUnit = 0M,
+                    Description = ProductConstants.PAPER_MASK_DESCRIPTION,
+                    Id = ProductConstants.PAPER_MASK_ID,
+                    ProductName = ProductConstants.PAPER_MASK_NAME,
+                    Quantity = 1
+                });
+
                 Successor.Handle(cart);
             }
             else

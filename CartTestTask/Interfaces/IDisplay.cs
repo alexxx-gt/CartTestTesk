@@ -10,7 +10,7 @@ namespace CartTestTask.Interfaces
         int GetProductCount(string itemId);
         decimal GetItemSubtotal(string itemId);
         decimal GetBasketSubtotal();
-        void GetDiscount();
+        List<string> GetDiscount();
         decimal GetGrandTotal();
     }
 }

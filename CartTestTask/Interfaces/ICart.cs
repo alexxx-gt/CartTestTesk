@@ -17,6 +17,5 @@ namespace CartTestTask.Interfaces
         void RemoveSet(CartItem item);
         void EmptyCart();
         void ApplyDiscountCart();
-        ////void ApplyRowDiscount();
     }
 }
