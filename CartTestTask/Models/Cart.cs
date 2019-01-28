@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using CartTestTask.Interfaces;
@@ -11,6 +12,7 @@ namespace CartTestTask.Models
         public List<CartItem> ItemsList { get; set; } = new List<CartItem>();
         public decimal GrandTotal { get; set; }
         public List<CartItem> BonusItemsList { get; set; } = new List<CartItem>();
+        public List<string> DiscountsList { get; set; }
 
         public void AddItem(CartItem item)
         {
@@ -77,17 +79,33 @@ namespace CartTestTask.Models
             if (item != null)
                 return item.Quantity;
             else
-                throw new Exception();
+                throw new NullReferenceException();
         }
 
         public decimal GetItemSubtotal(string itemId)
         {
-            
+            var item = ItemsList.FirstOrDefault(i => i.Id == itemId);
+
+            if (item != null)
+            {
+                return item.Quantity * item.CostPerUnit;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public decimal GetBasketSubtotal()
         {
-            throw new NotImplementedException();
+            decimal sum = 0;
+
+            foreach (var item in ItemsList)
+            {
+                sum += item.Quantity * item.CostPerUnit;
+            }
+
+            return sum;
         }
 
         public void GetDiscount()
