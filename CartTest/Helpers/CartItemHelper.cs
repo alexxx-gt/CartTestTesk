@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CartTestTask.Infrastructure.Constants;
+﻿using CartTestTask.Infrastructure.Constants;
 using CartTestTask.Models;
 
 namespace CartTest.Helpers

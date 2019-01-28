@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CartTestTask.Infrastructure.Constants;
+﻿using CartTestTask.Infrastructure.Constants;
 using CartTestTask.Models;
+using System.Linq;
 
 namespace CartTestTask.Infrastructure.DiscountChainHandling
 {

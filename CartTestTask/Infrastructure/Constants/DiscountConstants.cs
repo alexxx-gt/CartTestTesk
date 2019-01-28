@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-
-namespace CartTestTask.Infrastructure.Constants
+﻿namespace CartTestTask.Infrastructure.Constants
 {
     public static class DiscountConstants
     {

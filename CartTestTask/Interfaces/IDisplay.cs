@@ -1,12 +1,11 @@
-﻿using System;
+﻿using CartTestTask.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CartTestTask.Interfaces
 {
     public interface IDisplay
     {
-        void GetProductList();
+        List<CartItem> GetProductList();
         int GetProductCount(string itemId);
         decimal GetItemSubtotal(string itemId);
         decimal GetBasketSubtotal();

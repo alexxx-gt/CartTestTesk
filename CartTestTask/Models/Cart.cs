@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using CartTestTask.Infrastructure.Constants;
+﻿using CartTestTask.Infrastructure.Constants;
 using CartTestTask.Infrastructure.DiscountChainHandling;
 using CartTestTask.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CartTestTask.Models
 {
@@ -67,9 +65,9 @@ namespace CartTestTask.Models
             bowlOfTriffle.Successor = shurikens;
         }
 
-        public void GetProductList()
+        public List<CartItem> GetProductList()
         {
-            throw new NotImplementedException();
+            return ItemsList;
         }
 
         public int GetProductCount(string itemId)
@@ -111,6 +109,7 @@ namespace CartTestTask.Models
         public List<string> GetDiscount()
         {
             ApplyDiscountCart();
+
             return DiscountsList;
         }
 

@@ -1,7 +1,5 @@
-﻿using System;
+﻿using CartTestTask.Models;
 using System.Collections.Generic;
-using System.Text;
-using CartTestTask.Models;
 
 namespace CartTestTask.Interfaces
 {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CartTest.Helpers;
+﻿using CartTest.Helpers;
 using CartTestTask.Infrastructure.Constants;
 using CartTestTask.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace CartTest
 {
