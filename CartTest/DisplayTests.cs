@@ -13,7 +13,26 @@ namespace CartTest
         [TestMethod]
         public void TestGetProductList()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddShurikens(15));
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+
+            bool equalityCheckResult = true;
+            for (int i = 0; i < cart.ItemsList.Count; i++)
+            {
+                if (cart.ItemsList[i].Equals(list[i]))
+                {
+                    continue;
+                }
+                else
+                {
+                    equalityCheckResult = false;
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
@@ -94,13 +113,53 @@ namespace CartTest
         [TestMethod]
         public void TestGetDiscount()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddShurikens(100));
+            list.Add(CartItemHelper.AddLargeBowl(1));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.POGS_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+
+            var discountList = cart.GetDiscount();
+
+            bool equalityCheckResult = discountList.Count == expectedDiscountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountList.Count; i++)
+                {
+                    if (cart.DiscountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
         public void TestGetGrandTotal()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddShurikens(100));
+            list.Add(CartItemHelper.AddLargeBowl(1));
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+
+            Assert.AreEqual(634.0005M, cart.GetGrandTotal());
         }
 
         [TestMethod]

@@ -99,7 +99,38 @@ namespace CartTest
         [TestMethod]
         public void TestApplyDiscount()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddShurikens(100));
+            list.Add(CartItemHelper.AddLargeBowl(1));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.POGS_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
     }
 }

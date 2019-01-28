@@ -8,18 +8,22 @@ namespace CartTestTask.Infrastructure.DiscountChainHandling
     {
         public override void Handle(Cart cart)
         {
-            var shurikensItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.LARGE_BOWL_ID);
+            var shurikensItem = cart.ItemsList.FirstOrDefault(i => i.Id == ProductConstants.SHURICKEN_ID);
 
-            if (shurikensItem != null && shurikensItem.Quantity > DiscountConstants.SHURIKEN_DISCOUNT_QTY)
+            if (shurikensItem != null && shurikensItem.Quantity >= DiscountConstants.SHURIKEN_DISCOUNT_QTY)
             {
                 cart.DiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
                 cart.GrandTotal += shurikensItem.Quantity * shurikensItem.CostPerUnit;
                 cart.GrandTotal = cart.GrandTotal * (1 - DiscountConstants.SHURIKEN_CART_DISCOUNT);
 
-                Successor.Handle(cart);
+                if (Successor != null)
+                {
+                    Successor.Handle(cart);
+                }
             }
-            else
+            else if (Successor != null)
             {
+                cart.GrandTotal += shurikensItem.Quantity * shurikensItem.CostPerUnit;
                 Successor.Handle(cart);
             }
         }

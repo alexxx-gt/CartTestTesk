@@ -19,11 +19,18 @@ namespace CartTestTask.Infrastructure.DiscountChainHandling
                                        (bagOfPogsItem.Quantity - 1) * bagOfPogsItem.CostPerUnit * (1 - DiscountConstants.POGS_EXTRA_ITEM_DISCOUNT);
                 }
 
-                Successor.Handle(cart);
+                if (Successor != null)
+                {
+                    Successor.Handle(cart);
+                }
             }
-            else
+            else if (Successor != null)
             {
-                cart.GrandTotal += bagOfPogsItem.CostPerUnit * bagOfPogsItem.Quantity;
+                if (bagOfPogsItem != null)
+                {
+                    cart.GrandTotal += bagOfPogsItem.CostPerUnit * bagOfPogsItem.Quantity;
+                }
+                
                 Successor.Handle(cart);
             }
         }

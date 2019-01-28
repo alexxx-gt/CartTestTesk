@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CartTest.Helpers;
+﻿using CartTest.Helpers;
 using CartTestTask.Infrastructure.Constants;
 using CartTestTask.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace CartTest
 {
@@ -14,54 +12,242 @@ namespace CartTest
         [TestMethod]
         public void TestBagsDiscount()
         {
-            List<CartItem> itemsList = new List<CartItem>();
+            List<CartItem> list = new List<CartItem>();
 
-            itemsList.Add(CartItemHelper.AddBagOfPogs(3));
+            list.Add(CartItemHelper.AddBagOfPogs(2));
 
-            Cart cart = CartHelper.CreateNotEmptyCart(itemsList);
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.POGS_DISCOUNT);
 
-            decimal actualAmount = cart.GetItemSubtotal(ProductConstants.BAG_OF_POGS_ID);
-            var pogsQuantity = cart.GetProductCount(ProductConstants.BAG_OF_POGS_ID);
-            decimal expectedAmount = ProductConstants.BAG_OF_POGS_COST +
-                                     (pogsQuantity - 1) * ProductConstants.BAG_OF_POGS_COST / 2;
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
 
-            Assert.AreEqual(expectedAmount, actualAmount);
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
         public void TestShurikenDiscount()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddShurikens(100));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
         public void TestBowlDiscount()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddLargeBowl(1));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
         public void TestBagsBowlDiscounts()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddLargeBowl(1));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.POGS_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
         public void TestBagsShurikensDiscounts()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddShurikens(100));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.POGS_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
-        public void testBowlShurikensDiscounts()
+        public void TestBowlShurikensDiscounts()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddLargeBowl(1));
+            list.Add(CartItemHelper.AddShurikens(100));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
 
         [TestMethod]
         public void TestAllDiscounts()
         {
-            Assert.IsTrue(true);
+            List<CartItem> list = new List<CartItem>();
+
+            list.Add(CartItemHelper.AddBagOfPogs(2));
+            list.Add(CartItemHelper.AddShurikens(100));
+            list.Add(CartItemHelper.AddLargeBowl(1));
+
+            List<string> expectedDiscountsList = new List<string>();
+            expectedDiscountsList.Add(DiscountConstants.POGS_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.BOWL_DISCOUNT);
+            expectedDiscountsList.Add(DiscountConstants.SHURIKENS_DISCOUNT);
+
+            Cart cart = CartHelper.CreateNotEmptyCart(list);
+            var discountsList = cart.GetDiscount();
+
+            bool equalityCheckResult = expectedDiscountsList.Count == discountsList.Count;
+
+            if (equalityCheckResult)
+            {
+                for (int i = 0; i < discountsList.Count; i++)
+                {
+                    if (discountsList[i].Equals(expectedDiscountsList[i]))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        equalityCheckResult = false;
+                    }
+                }
+            }
+
+            Assert.IsTrue(equalityCheckResult);
         }
     }
 }

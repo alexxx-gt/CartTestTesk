@@ -23,10 +23,14 @@ namespace CartTestTask.Infrastructure.DiscountChainHandling
                     Quantity = 1
                 });
 
-                Successor.Handle(cart);
+                if (Successor != null)
+                {
+                    Successor.Handle(cart);
+                }
             }
-            else
+            else if (Successor != null)
             {
+                //cart.GrandTotal += largeBowlItem.CostPerUnit * largeBowlItem.Quantity;
                 Successor.Handle(cart);
             }
         }

@@ -63,6 +63,10 @@ namespace CartTestTask.Models
             ShurikensDiscount shurikens = new ShurikensDiscount();
             bagsOfPogs.Successor = bowlOfTriffle;
             bowlOfTriffle.Successor = shurikens;
+
+            bagsOfPogs.Handle(this);
+
+            //Also, here is a possibility to implement discounts system using extension methods
         }
 
         public List<CartItem> GetProductList()
